@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+<!-- Styles block -->
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1>404 Error</h1>
+<p class="zoom-area"><b>Hi</b> OOPS! PAGE NOT FOUND </p>
+<div class="link-container">
+    <a href="#" class="more-link" [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a>
+</div>
+{% endblock %}
