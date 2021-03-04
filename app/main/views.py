@@ -20,7 +20,7 @@ def index():
         'Trends'
         ]
 
-    title = 'Pitch Perfect'
+    title = 'Pitches'
     pitches = Pitch.query.all()
 
     return render_template('index.html', title = title, pitches = pitches, categories = categories)
@@ -80,7 +80,7 @@ def new_pitch():
         new_pitch = Pitch(pitch_title = pitch_title, pitch_body = pitch_body, user = current_user, category =form.category.data, postedBy = current_user.username)
         new_pitch.save_pitch()
 
-    title = 'Pitch Perfect'
+    title = 'Pitches'
     return render_template('pitch/new_pitch.html', title = title, pitch_form = form)
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET', 'POST'])
@@ -101,7 +101,7 @@ def new_comment(id):
 
         return redirect(url_for('.pitch', id = id))
 
-    title = 'Pitch Perfect'
+    title = 'Pitches'
 
     return render_template('pitch/comment.html', title = title, form = form, pitch = pitch)
 

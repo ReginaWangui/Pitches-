@@ -17,7 +17,7 @@ def login():
 
         flash('Invalid Username or Password')
 
-    title = 'Pitch Perfect'
+    title = 'Pitches'
     return render_template('auth/login.html', login_form = login_form, title = title)
 
 

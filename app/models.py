@@ -21,7 +21,7 @@ class User(UserMixin, db.Model):
     bio = db.Column(db.String(255))
     profile_pi_path = db.Column(db.String())
     pitch = db.relationship('Pitch', backref = 'user', lazy = 'dynamic')
-    comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
+    comment = db.relationship('response', backref = 'user', lazy = 'dynamic')
 
     @property
     def password(self):
@@ -48,7 +48,7 @@ class Pitch(UserMixin, db.Model):
     postedBy = db.Column(db.String)
     posted = db.Column(db.DateTime, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    pitch = db.relationship('Comment', backref = 'user_pitch', lazy = 'dynamic')
+    pitch = db.relationship('response', backref = 'user_pitch', lazy = 'dynamic')
 
     def save_pitch(self):
         db.session.add(self)
@@ -56,7 +56,7 @@ class Pitch(UserMixin, db.Model):
 
 class Comment(db.Model):
 
-    __tablename__ = 'comments'
+    __tablename__ = 'response'
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
