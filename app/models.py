@@ -20,8 +20,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(255), unique = True, index = True)
     bio = db.Column(db.String(255))
     profile_pi_path = db.Column(db.String())
-    pitch = db.relationship('Pitch', backref = 'user', lazy = 'dynamic')
-    comment = db.relationship('response', backref = 'user', lazy = 'dynamic')
+    # pitch = db.relationship('Pitches', backref = 'user_id', lazy = 'dynamic')
+    # comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
 
     @property
     def password(self):
@@ -48,10 +48,11 @@ class Pitch(UserMixin, db.Model):
     postedBy = db.Column(db.String)
     posted = db.Column(db.DateTime, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    pitch = db.relationship('response', backref = 'user_pitch', lazy = 'dynamic')
+    # pitch = db.relationship('response', backref = 'user_pitch', lazy = 'dynamic')
 
-    def save_pitch(self):
-        db.session.add(self)
+
+    def save_pitch(user):
+        db.session.add(user)
         db.session.commit()
 
 class Comment(db.Model):
@@ -66,14 +67,14 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
-    def save_comment(self):
+    def save_response(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def get_comments(cls, id):
+    def get_response(cls, id):
         '''
         Takes in apitch id and retrieves all pitches for that specific pitch
         '''
-        comments = Comment.query.filter_by(pitch_id = id)
-        return comments 
+        response = response.query.filter_by(pitch_id = id)
+        return response 

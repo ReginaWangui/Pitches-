@@ -15,7 +15,7 @@
     {% if title %}
     <title>{{ title }}</title>
     {% else %}
-    <title>PITCHES</title>
+    <title>Welcome to Pitch Perfect</title>
     {% endif %}
 </head>
 
@@ -27,7 +27,7 @@
             <div class="col-md-8">
                 <div class="media g-mb-30 media-comment">
                     <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                        src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" />
+                        src="https://www.news4jax.com/resizer/b89RYEm5oAgzxJxWIGoyLJ9lZu8=/960x960/smart/filters:format(jpeg):strip_exif(true):strip_icc(true):no_upscale(true):quality(65)/cloudfront-us-east-1.images.arcpublishing.com/gmg/X462YQ4HIJEGHHX2I3LXRV4G7A.jpg" alt="Image Description" />
                     <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                         <div class="g-mb-15">
                             <a href="#!" class="list-group-item active">{{category}}</a>
@@ -73,7 +73,35 @@
             </div>
             {% endfor %}
 
-     </div>
+            <!-- <div class="container home">
+                <div class="row">
+                    {% for category in categories %}
+                    <div class="list-group">
+                        <a href="#!" class="list-group-item active">{{category}}</a>
+                        {{format_review|safe}}
+                        {% for pitch in pitches %}
+                        {% if pitch.category == category %}
+                        <a href="{{url_for('main.pitch',id=pitch.id)}}"
+                            class="list-group-item"><i>{{pitch.pitch_title|safe}}</i>
+                            <p></p>{{pitch.pitch_body|safe}}<p></p>{{pitch.posted}}
+                            {% if pitch.postedBy == None %}
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Expedita, tenetur! Aliquid iure, commodi illo recusandae
+                                a excepturi facilis deleniti quis.
+                            </p>
+                        </a>
+                        {% else %}
+                        <p></p><b>{{pitch.postedBy|safe}}</b><a></a>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </div>
+            </div> -->
+        </div>
     </div>
     <style>
         .home {

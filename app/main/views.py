@@ -20,10 +20,10 @@ def index():
         'Trends'
         ]
 
-    title = 'Pitches'
-    pitches = Pitch.query.all()
+    title = 'Pitch app'
+    pitch = Pitch.query.all()
 
-    return render_template('index.html', title = title, pitches = pitches, categories = categories)
+    return render_template('index.html', title = title, pitch = pitch, categories = categories)
 
 @main.route('/user/<uname>')
 @login_required
@@ -33,8 +33,8 @@ def profile(uname):
     if user is None:
         abort(404)
 
-    pitches_posted = Pitch.query.filter_by(user_id = current_user.id).all()
-    return render_template('profile/profile.html', user = user, pitches = pitches_posted)
+    pitch_posted = Pitch.query.filter_by(user_id = current_user.id).all()
+    return render_template('profile/profile.html', user = user, pitch = pitch_posted)
 
 @main.route('/user/<uname>/update', methods = ['GET', 'POST'])
 @login_required
@@ -77,10 +77,10 @@ def new_pitch():
 
         pitch_title = markdown2.markdown(pitch_title, extras=["code-friendly", "fenced-code-blocks"])
         pitch_body = markdown2.markdown(pitch_body, extras=["code-friendly", "fenced-code-blocks"])
-        new_pitch = Pitch(pitch_title = pitch_title, pitch_body = pitch_body, user = current_user, category =form.category.data, postedBy = current_user.username)
+        new_pitch = Pitch(pitch_title = pitch_title, pitch_body = pitch_body, user_id = current_user, category =form.category.data, postedBy = current_user.username)
         new_pitch.save_pitch()
 
-    title = 'Pitches'
+    title = 'Pitch app'
     return render_template('pitch/new_pitch.html', title = title, pitch_form = form)
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET', 'POST'])
@@ -101,7 +101,7 @@ def new_comment(id):
 
         return redirect(url_for('.pitch', id = id))
 
-    title = 'Pitches'
+    title = 'Pitch app'
 
     return render_template('pitch/comment.html', title = title, form = form, pitch = pitch)
 

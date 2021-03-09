@@ -6,7 +6,7 @@ class Config:
     '''
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:Access@localhost/regina'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:mynamereginah@localhost/reginah'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOADED_PHOTOS_DEST = 'app/static/photos' 
     # email configuration
@@ -19,6 +19,16 @@ class Config:
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
 
+    DEBUG = True
+
+class DevConfig(Config):
+    '''
+    Development configuration child class
+
+    Args:
+        Config: The parent configuration class with General configuaration settings
+    '''
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://postgres:mynamereginah@localhost/reginah"
 
 class ProdConfig(Config):
     '''
@@ -28,14 +38,6 @@ class ProdConfig(Config):
         Config: The parent configuration class with general configuration settings
     '''
 
-
-class DevConfig(Config):
-    '''
-    Development configuration child class
-
-    Args:
-        Config: The parent configuration class with General configuaration settings
-    '''
 
 class TestConfig(Config):
     '''
